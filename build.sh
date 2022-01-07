@@ -10,7 +10,7 @@ if [[ ! -d "flex-2.5.4" ]]; then
 	tar -xf ../distrib_extras/flex-2.5.4_patch.tar.gz
 fi
 pushd flex-2.5.4
-./configure --prefix=${localInstall}
+CFLAGS="-g -O3 -Wno-implicit-function-declaration -Wno-knr-promoted-parameter" ./configure --prefix=${localInstall}
 make install
 popd
 popd
@@ -29,7 +29,7 @@ pushd obj
 make WITH_FLEXLM=NOFLEX            \
   ALLIANCE_TOP=${buildDir}         \
   AVERTEC_TOP=${buildDir}          \
-  AVERTEC_OS=Linux                 \
+  AVERTEC_OS=`uname -s`            \
   AVERTEC_LICENSE=AVERTEC_DUMMY    \
   AVT_LICENSE_SERVER=house         \
   AVT_LICENSE_FILE=27009@house     \
@@ -38,7 +38,7 @@ make WITH_FLEXLM=NOFLEX            \
   PACKAGING_TOP=${localInstall}    \
   LEX=${localInstall}/bin/flex     \
   JAVA_HOME=/usr/lib/jvm/default   \
-  CFLAGS="-g -O3" CXXFLAGS=-"-g -O3" STRIP=true \
+  CFLAGS="-g -O3 -Wno-implicit-function-declaration -Wno-knr-promoted-parameter" CXXFLAGS=-"-g -O3" STRIP=true \
   SAXON="java -jar ${buildDir}/../distrib_extras/saxon9.jar"
 popd
 popd
