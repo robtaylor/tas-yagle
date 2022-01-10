@@ -39,6 +39,12 @@
 #define AVT_INIT_KEY {21,34,241,66,171,27,33,65,161,204,23,128,19,14,199,'\0'}
 #define AVT_INIT_SEED (long)6970
 
+#define STRINGIFY(x) #x
+#define TOSTRING(x) STRINGIFY(x)
+#define AVT_COL(COL) "\021" TOSTRING(COL)
+#define AVT_COL_CHAR '\021'
+#define AVT_COL_STR "\021"
+
 extern int   AVT_COL;
 extern const char *AVERTEC_VERSION ;
 extern const char *AVT_FULLVERSION ;
