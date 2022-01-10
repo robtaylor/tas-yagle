@@ -2,15 +2,15 @@
 #include "avt_lib.h"
 
 
-char *ANNOT_T_D=NULL, *ANNOT_T_S=NULL, *ANNOT_T_G=NULL, *ANNOT_T_B=NULL;
-char *ANNOT_R_POS=NULL, *ANNOT_R_NEG=NULL;
-char *ANNOT_D_POS=NULL, *ANNOT_D_NEG=NULL;
-char *ANNOT_C_POS=NULL, *ANNOT_C_NEG=NULL;
+const char *ANNOT_T_D=NULL, *ANNOT_T_S=NULL, *ANNOT_T_G=NULL, *ANNOT_T_B=NULL;
+const char *ANNOT_R_POS=NULL, *ANNOT_R_NEG=NULL;
+const char *ANNOT_D_POS=NULL, *ANNOT_D_NEG=NULL;
+const char *ANNOT_C_POS=NULL, *ANNOT_C_NEG=NULL;
 unsigned long int RCN_CACHE_SIZE=10*1024*1024;
 
-int avtAnnotationDeviceConnectorSetting_init(char *var, char *val, char *result)
+int avtAnnotationDeviceConnectorSetting_init(const char *var, const char *val, char *result)
 {
-  char **items[]={&ANNOT_T_S, &ANNOT_T_G, &ANNOT_T_D, &ANNOT_T_B,
+  const char **items[]={&ANNOT_T_S, &ANNOT_T_G, &ANNOT_T_D, &ANNOT_T_B,
                   &ANNOT_R_POS, &ANNOT_R_NEG,
                   &ANNOT_C_POS, &ANNOT_C_NEG,
                   &ANNOT_D_POS, &ANNOT_D_NEG};
@@ -38,13 +38,13 @@ int avtAnnotationDeviceConnectorSetting_init(char *var, char *val, char *result)
 }
 
 // -----------------------------------------
-char env_SIMUINV=' ';
-char *SIMUINVCONENAME=NULL, *SIMUINV_PREFIX=NULL;
+const char env_SIMUINV=' ';
+const char *SIMUINVCONENAME=NULL, *SIMUINV_PREFIX=NULL;
 int tpiv_inverter_config_reverse=1;
 float tpiv_inverter_config_t0r=0, tpiv_inverter_config_t0f=0;
 float tpiv_inverter_config_tmax=100e-12;
 
-int tasSimulateInverter_init(char *var, char *env, char *result)
+int tasSimulateInverter_init(const char *var, const char *env, char *result)
 {
   char *tmp;
   if (SIMUINV_PREFIX!=NULL) free(SIMUINV_PREFIX);
@@ -83,7 +83,7 @@ int tasSimulateInverter_init(char *var, char *env, char *result)
   return 1;
 }
 
-int tpiv_inverter_config_init(char *var, char *config, char *result)
+int tpiv_inverter_config_init(const char *var, const char *config, char *result)
 {
   char  *tmp ;
   char  *tok ;
@@ -134,7 +134,7 @@ int tpiv_inverter_config_init(char *var, char *config, char *result)
 }
 
 
-int yagSimpleLatchDetection_init(char *var, char *val, char *result)
+int yagSimpleLatchDetection_init(const char *var, const char *val, char *result)
 { 
   char buf[1024];
   char *c, *tok;
@@ -153,7 +153,7 @@ int yagSimpleLatchDetection_init(char *var, char *val, char *result)
   return 1;
 }
 
-int yagDetectClockGating_init(char *var, char *val, char *result)
+int yagDetectClockGating_init(const char *var, const char *val, char *result)
 { 
   char buf[1024];
   char *c, *tok;
@@ -178,7 +178,7 @@ int TTV_MaxPathPeriodPrecharge=0;
 // mask: 1=latch, 2=precharge, 4=filter
 int TTV_IgnoreMaxFilter=0;
 
-int avtTransparentPrecharge_init(char *var, char *val, int *result)
+int avtTransparentPrecharge_init(const char *var, const char *val, int *result)
 { 
   TTV_IgnoreMaxFilter&=~2;
   if (!strcasecmp (val, "yes")) *result=1, TTV_MaxPathPeriodPrecharge=1;
@@ -193,7 +193,7 @@ int avtTransparentPrecharge_init(char *var, char *val, int *result)
 
 // -----------------------------------------
 
-int ttvIgnoreMaxFilter_init(char *var, char *val, char *result)
+int ttvIgnoreMaxFilter_init(const char *var, const char *val, char *result)
 {
   char buf[1024];
   char *c, *tok;
@@ -216,7 +216,7 @@ int ttvIgnoreMaxFilter_init(char *var, char *val, char *result)
   return 1;
 }
 
-int avtParasiticCacheSize_init(char *var, char *val, char *result)
+int avtParasiticCacheSize_init(const char *var, const char *val, char *result)
 {
   long oldval=RCN_CACHE_SIZE;
   char *ptend;
@@ -297,7 +297,7 @@ const struct {
               {"mv", 1e-3},
               {"v", 1}};
 
-double avt_parse_unit(char *str, char type)
+double avt_parse_unit(const char *str, char type)
 {
   char    *nxt;
   unsigned int i;
@@ -377,24 +377,24 @@ double avt_parse_unit(char *str, char type)
   return val;
 }
 
-int avt_parse_time (char *var, char *val, float *result) 
+int avt_parse_time (const char *var, const char *val, float *result) 
 {
   *result=avt_parse_unit(val, 't');
   return 1;
 }
 
-int avt_parse_capa (char *var, char *val, float *result) 
+int avt_parse_capa (const const char *var, const char *val, float *result) 
 {
   *result=avt_parse_unit(val, 'c');
   return 1;
 }
-int avt_parse_mem (char *var, char *val, float *result) 
+int avt_parse_mem (const char *var, const char *val, float *result) 
 {
   *result=avt_parse_unit(val, 'm');
   return 1;
 }
 
-void avt_init_model(chain_list **list, char *str)
+void avt_init_model(chain_list **list, const char *str)
 {
   char buf[1024];
   char *tmp, *pttok;
@@ -408,25 +408,25 @@ void avt_init_model(chain_list **list, char *str)
   }
 }
 
-int avt_init_model_tn (char *var, char *val, char *result) 
+int avt_init_model_tn (const char *var, const char *val, char *result)
 {
   avt_init_model(&TNMOS, val);
   result=NULL; var=NULL;
   return 1;
 }
-int avt_init_model_tp (char *var, char *val, char *result) 
+int avt_init_model_tp (const char *var, const char *val, char *result)
 {
   avt_init_model(&TPMOS, val);
   result=NULL; var=NULL;
   return 1;
 }
-int avt_init_model_dn (char *var, char *val, char *result) 
+int avt_init_model_dn (const char *var, const char *val, char *result)
 {
   avt_init_model(&DNMOS, val);
   result=NULL; var=NULL;
   return 1;
 }
-int avt_init_model_dp (char *var, char *val, char *result) 
+int avt_init_model_dp (const char *var, const char *val, char *result)
 {
   avt_init_model(&DPMOS, val);
   result=NULL; var=NULL;
