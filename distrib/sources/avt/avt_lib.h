@@ -81,7 +81,7 @@ extern void avtenv        __P(()) ;
 extern void avt_setvar    __P((const char *,const char *));
 extern void avt_trace     __P((int level, FILE *output, const char *fmt, ...));
 extern void avt_trace_va  __P((int level, FILE *output, const char *fmt, va_list pa));
-extern void avt_date      __P((const char *date));
+extern void avt_date      __P((char *date));
 extern void avt_error     __P((const char *lib, int code, int severity, const char *fmt, ...));
 
 // printf a colored printf, use '¤<#>" eg. toto = ¤3value

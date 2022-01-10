@@ -2,15 +2,15 @@
 #include "avt_lib.h"
 
 
-const char *ANNOT_T_D=NULL, *ANNOT_T_S=NULL, *ANNOT_T_G=NULL, *ANNOT_T_B=NULL;
-const char *ANNOT_R_POS=NULL, *ANNOT_R_NEG=NULL;
-const char *ANNOT_D_POS=NULL, *ANNOT_D_NEG=NULL;
-const char *ANNOT_C_POS=NULL, *ANNOT_C_NEG=NULL;
+char *ANNOT_T_D=NULL, *ANNOT_T_S=NULL, *ANNOT_T_G=NULL, *ANNOT_T_B=NULL;
+char *ANNOT_R_POS=NULL, *ANNOT_R_NEG=NULL;
+char *ANNOT_D_POS=NULL, *ANNOT_D_NEG=NULL;
+char *ANNOT_C_POS=NULL, *ANNOT_C_NEG=NULL;
 unsigned long int RCN_CACHE_SIZE=10*1024*1024;
 
 int avtAnnotationDeviceConnectorSetting_init(const char *var, const char *val, char *result)
 {
-  const char **items[]={&ANNOT_T_S, &ANNOT_T_G, &ANNOT_T_D, &ANNOT_T_B,
+  char * *items[]={&ANNOT_T_S, &ANNOT_T_G, &ANNOT_T_D, &ANNOT_T_B,
                   &ANNOT_R_POS, &ANNOT_R_NEG,
                   &ANNOT_C_POS, &ANNOT_C_NEG,
                   &ANNOT_D_POS, &ANNOT_D_NEG};
@@ -38,15 +38,17 @@ int avtAnnotationDeviceConnectorSetting_init(const char *var, const char *val, c
 }
 
 // -----------------------------------------
-const char env_SIMUINV=' ';
-const char *SIMUINVCONENAME=NULL, *SIMUINV_PREFIX=NULL;
+char env_SIMUINV=' ';
+char *SIMUINVCONENAME=NULL, *SIMUINV_PREFIX=NULL;
 int tpiv_inverter_config_reverse=1;
 float tpiv_inverter_config_t0r=0, tpiv_inverter_config_t0f=0;
 float tpiv_inverter_config_tmax=100e-12;
 
 int tasSimulateInverter_init(const char *var, const char *env, char *result)
 {
-  char *tmp;
+  const char *tmp;
+  const char *e = env;
+  int len = strlen(env); //largest it can be
   if (SIMUINV_PREFIX!=NULL) free(SIMUINV_PREFIX);
   if (SIMUINVCONENAME!=NULL) free(SIMUINVCONENAME);
   
@@ -57,22 +59,25 @@ int tasSimulateInverter_init(const char *var, const char *env, char *result)
     env_SIMUINV = ' ';
   }
   else {
-    if (*env == 'S')
+    if (*e == 'S')
       env_SIMUINV = 'S';
     else
       env_SIMUINV = 'T';
-    env++;
-    while (*env == ' ' && *env != '\0')
-      env++;
-    tmp=env;
-    while (*env != ' ' && *env != '\0')
-      env++;
-    if (*env==' ') *env='\0', env++;
+    e++;
+    while (*e == ' ' && *e != '\0')
+      e++;
+    tmp=e;
+    while (*e != ' ' && *e != '\0')
+      e++;
+    if (*e==' ') {
+      len = e-env;
+      e++;
+    }
     if (*tmp != '\0')
-      SIMUINVCONENAME = strdup(tmp);
-    while (*env == ' ' && *env != '\0')
-      env++;
-    tmp=env;
+      SIMUINVCONENAME = strndup(tmp, len);
+    while (*e == ' ' && *e != '\0')
+      e++;
+    tmp=e;
     if (*tmp!='\0') SIMUINV_PREFIX = strdup(tmp);
 
 

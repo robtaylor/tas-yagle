@@ -327,7 +327,7 @@ int avt_text_real_length(const char *buf)
   return cnt;
 }
 
-void avt_format_text(char *resbuf, char *origbuf, int decal, int max)
+void avt_format_text(char *resbuf, const char *origbuf, int decal, int max)
 {
   int i=0, j=0, k, cnt=decal;
   
