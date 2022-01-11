@@ -41,9 +41,9 @@
 
 #define STRINGIFY(x) #x
 #define TOSTRING(x) STRINGIFY(x)
-#define AVT_COL(COL) "\021" TOSTRING(COL)
-#define AVT_COL_CHAR '\021'
-#define AVT_COL_STR "\021"
+#define AVT_COLOUR(COL) "\021" TOSTRING(COL)
+#define AVT_COLOUR_CHAR '\021'
+#define AVT_COLOUR_STR "\021"
 
 extern int   AVT_COL;
 extern const char *AVERTEC_VERSION ;
