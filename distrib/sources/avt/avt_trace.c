@@ -122,16 +122,16 @@ void avt_error (const char *lib, int code, int severity, const char *fmt, ...)
 
     switch(severity)
       {
-      case AVT_ERR: typemsg=AVT_COL(6) AVT_COL(+) "Error"; break;
-      case AVT_WAR: typemsg=AVT_COL(4) "Warning"; break;
+      case AVT_ERR: typemsg=AVT_COLOUR(6) AVT_COLOUR(+) "Error"; break;
+      case AVT_WAR: typemsg=AVT_COLOUR(4) "Warning"; break;
       case AVT_INFO:
       default:
-        typemsg=AVT_COL(1) "Info";
+        typemsg=AVT_COLOUR(1) "Info";
       }
     if (code<=0)
-      sprintf (error_msg, "[%s" AVT_COL(.) "][" AVT_COL(+)  "%s" AVT_COL(.) "] ", typemsg, lib);
+      sprintf (error_msg, "[%s" AVT_COLOUR(.) "][" AVT_COLOUR(+)  "%s" AVT_COLOUR(.) "] ", typemsg, lib);
     else
-      sprintf (error_msg, "[%s #%d" AVT_COL(.) "][" AVT_COL(+) "%s" AVT_COL(.) "] ", typemsg, code, lib);
+      sprintf (error_msg, "[%s #%d" AVT_COLOUR(.) "][" AVT_COLOUR(+) "%s" AVT_COLOUR(.) "] ", typemsg, code, lib);
 
     car = strlen (error_msg);
 
@@ -258,7 +258,7 @@ void avt_fprintf(FILE *output, const char *fmt, ...)
     va_end(pa);
 
     str=temp;
-    e=strchr(str, AVT_COL_CHAR);
+    e=strchr(str, AVT_COLOUR_CHAR);
     while (e!=NULL)
       {
         if (*(e+1)>='0' && *(e+1)<='0'+NBCOLORS-1)
@@ -303,10 +303,10 @@ void avt_fprintf(FILE *output, const char *fmt, ...)
             break;
           default:
             *e='\0';
-            fprintf(output,"%s" AVT_COL_STR ,str);
+            fprintf(output,"%s" AVT_COLOUR_STR ,str);
             str=e+1;
           }
-        e=strchr(str,AVT_COL_CHAR);
+        e=strchr(str,AVT_COLOUR_CHAR);
       }
 
     fputs (str, output);
@@ -320,7 +320,7 @@ int avt_text_real_length(const char *buf)
   int cnt=0;
   while (*buf!='\0')
     {
-      if (*buf==AVT_COL_CHAR && *(buf+1)!='\0') cnt-=1;
+      if (*buf==AVT_COLOUR_CHAR && *(buf+1)!='\0') cnt-=1;
       else cnt++;
       buf++;
     }
@@ -334,7 +334,7 @@ void avt_format_text(char *resbuf, const char *origbuf, int decal, int max)
   while (origbuf[i]!='\0')
     {
       resbuf[j++]=origbuf[i];
-      if (origbuf[i]==AVT_COL_CHAR && origbuf[i+1]!='\0') cnt-=1;
+      if (origbuf[i]==AVT_COLOUR_CHAR && origbuf[i+1]!='\0') cnt-=1;
       else cnt++;
       i++;
       if (origbuf[i]=='\n' || cnt>=max)
