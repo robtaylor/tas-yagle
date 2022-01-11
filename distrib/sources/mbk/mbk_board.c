@@ -72,7 +72,7 @@ static void center(char *buf, int len, int width, char *txt)
   for (i=0; i<diff/2 && i<len-1; i++) buf[i]=' ';
   for (j=0; txt[j]!='\0' && i<len-1; j++) buf[i++]=txt[j];
   diff-=diff/2;
-  while (diff>0i && i<len-1) buf[i++]=' ', diff--;
+  while (diff>i && i<len-1) buf[i++]=' ', diff--;
   buf[i++]='\0';
 }
 
@@ -150,7 +150,7 @@ void Board_Display_sub(FILE *f, int lib, int lev, Board *B, char *LP)
                           totsize=B->prop[i].size+diff+1-1;
                           title_print_tag=1;
                         }
-                      else if (bc[i].value[0]==TITLE_CONT_CHAR' || bc[i].value[0]==TITLE_END_CHAR)
+                      else if (bc[i].value[0]==TITLE_CONT_CHAR || bc[i].value[0]==TITLE_END_CHAR)
                         {
                           if (strcmp(&bc[i].value[1],"")!=0)
                             {
