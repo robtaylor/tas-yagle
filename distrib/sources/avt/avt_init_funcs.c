@@ -388,7 +388,7 @@ int avt_parse_time (const char *var, const char *val, float *result)
   return 1;
 }
 
-int avt_parse_capa (const const char *var, const char *val, float *result) 
+int avt_parse_capa (const char *var, const char *val, float *result) 
 {
   *result=avt_parse_unit(val, 'c');
   return 1;
