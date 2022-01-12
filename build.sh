@@ -25,6 +25,8 @@ done
 ln -fs sources obj
 ln -fs share/etc etc
 
+CFLAGS="-g -O3 -Wno-implicit-function-declaration -Wno-knr-promoted-parameter -I${localInstall}/include"
+CPPFLAGS="-g -O3 -I${localInstall}/include"
 pushd obj
 make WITH_FLEXLM=NOFLEX            \
   ALLIANCE_TOP=${buildDir}         \
@@ -38,7 +40,7 @@ make WITH_FLEXLM=NOFLEX            \
   PACKAGING_TOP=${localInstall}    \
   LEX=${localInstall}/bin/flex     \
   JAVA_HOME=/usr/lib/jvm/default   \
-  CFLAGS="-g -O3 -Wno-implicit-function-declaration -Wno-knr-promoted-parameter" CXXFLAGS=-"-g -O3" STRIP=true \
+  CFLAGS="$CFLAGS" CPPFLAGS="$CPPFLAGS" STRIP=true \
   SAXON="java -jar ${buildDir}/../distrib_extras/saxon9.jar"
 popd
 popd
