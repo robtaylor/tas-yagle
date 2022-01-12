@@ -933,7 +933,7 @@ void flatten_parameters (lofig_list * fig, loins_list *ptfatherloins, eqt_param 
                 print_mlu_error(fig, ctx, var, ptopt->UDATA.EXPR, NULL, NULL);
                 value = opt_eval (ctx, ptopt);
              }
-             else if (!finite(value))
+             else if (!isfinite(value))
                avt_errmsg(MBK_ERRMSG, "051", AVT_ERROR, var, ptopt->UDATA.EXPR," : returned NaN or Inf");
              else if (MLU_TRACE_EQT)
                 fprintf (stdout, "RESI ---> '%s' = %g\n", ptopt->UDATA.EXPR, value);
@@ -996,7 +996,7 @@ void flatten_parameters (lofig_list * fig, loins_list *ptfatherloins, eqt_param 
                   print_mlu_error(fig, ctx, *(ptopt->UNAME.STANDARD-1), ptopt->UDATA.EXPR, NULL, NULL);
         //          avt_errmsg(MBK_ERRMSG, "002", AVT_ERROR, ptopt->UDATA.EXPR);
                }
-               else if (!finite(value))
+               else if (!isfinite(value))
                  avt_errmsg(MBK_ERRMSG, "051", AVT_ERROR, *(ptopt->UNAME.STANDARD-1), ptopt->UDATA.EXPR," : returned NaN or Inf");
                ptopt->UNAME.STANDARD -= 1;
                if (need_scale (*(ptopt->UNAME.STANDARD))) ptopt->UDATA.VALUE = value * scale;
@@ -1024,7 +1024,7 @@ void flatten_parameters (lofig_list * fig, loins_list *ptfatherloins, eqt_param 
                print_mlu_error(fig, ctx, var, ptopt->UDATA.EXPR, NULL, NULL);
 //               avt_errmsg(MBK_ERRMSG, "002", AVT_ERROR, ptopt->UDATA.EXPR);
             }
-            else if (!finite(value))
+            else if (!isfinite(value))
               avt_errmsg(MBK_ERRMSG, "051", AVT_ERROR, var, ptopt->UDATA.EXPR," : returned NaN or Inf");
          }
          else {
@@ -5680,7 +5680,7 @@ int mbk_recur_Eval(eqt_ctx *ctx, ht *allparams, char *name, char *where)
           freechain(support);
 //          avt_errmsg(MBK_ERRMSG, "051", AVT_ERROR, name, expr," : set to 0");
         }
-      else if (!finite(value))
+      else if (!isfinite(value))
         avt_errmsg(MBK_ERRMSG, "051", AVT_ERROR, name, expr," : returned NaN or Inf");
       eqt_addvar(ctx, name, value);
       return 0;
