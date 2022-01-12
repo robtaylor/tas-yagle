@@ -35,12 +35,12 @@ public:
     void create_function_getargs (char *name, char *iname, WIGType *d, ParmList *l);
 
 #ifdef USE_AVTWIG
-    void create_man (char *, WIGType *, ParmList *, functionman*);
+    void create_man (const char *, WIGType *, ParmList *, functionman*);
     void create_online (char *, WIGType *, ParmList *, functionman*);
-    void create_xml (char *, char *, WIGType *, ParmList *, functionman*, int first, int mode);
+    void create_xml (const char *, const char *, WIGType *, ParmList *, functionman*, int first, int mode);
     void create_man_man (chain_list *);
     void create_online (chain_list *, chain_list *);
-    void create_db (char *filename, char *name, WIGType *d, ParmList *l, functionman *man, int first, int mode);
+    void create_db (const char *filename, const char *name, WIGType *d, ParmList *l, functionman *man, int first, int mode);
     void create_filter (char *filter, char *filterfile, Man *);
     void create_filter_online (char *filter, char *online_path, Man *);
     void create_filter4xls (char *filter, char *filterfile, Man * mans);

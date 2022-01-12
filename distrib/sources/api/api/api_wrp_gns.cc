@@ -33,7 +33,7 @@ void GENIUS::parse ()
 
 /* -------------------------------------------------------------------------- */
 
-String *get_proto (char *name, WIGType *d, ParmList *l)
+String *get_proto (const char *name, WIGType *d, ParmList *l)
 {
     WIGType *pt;
     Parm *p;
@@ -77,7 +77,7 @@ String *get_proto (char *name, WIGType *d, ParmList *l)
 
 /* -------------------------------------------------------------------------- */
 
-String *get_short_proto (char *name, WIGType *d, ParmList *l)
+String *get_short_proto (const char *name, WIGType *d, ParmList *l)
 {
     WIGType *pt;
     Parm *p;
@@ -154,7 +154,7 @@ void stripCR (char *str, char *buf)
     buf[j] = '\0';
 }
 
-void GENIUS::create_online (char *name, WIGType *d, ParmList *l, functionman *man) 
+void GENIUS::create_online (char *name, WIGType *d, ParmList *l, functionman *man)
 { 
     FILE *f;
     char fname[1024], date[1024];
@@ -334,7 +334,7 @@ void GENIUS::create_man_man (chain_list *proto_list)
     fclose (f);
 }
 
-void GENIUS::create_man (char *name, WIGType *d, ParmList *l, functionman *man) 
+void GENIUS::create_man (const char *name, WIGType *d, ParmList *l, functionman *man)
 { 
     FILE *f;
     char fname[1024], date[1024];
@@ -499,14 +499,14 @@ xml_text(char *buf, char *src)
     *buf = 0;
 }
 
-void GENIUS::create_xml (char *filename, char *name, WIGType *d, ParmList *l, functionman *man, int first, int mode) 
+void GENIUS::create_xml (const char *filename, const char *name, WIGType *d, ParmList *l, functionman *man, int first, int mode)
 { 
     FILE *f;
     char fname[1024];
     char tmpname[1024];
     char *description;
     char *prototype;
-    char *basename;
+    const char *basename;
     char  textbuf[10000];
     char *args;
     int i;
@@ -590,12 +590,13 @@ void GENIUS::create_xml (char *filename, char *name, WIGType *d, ParmList *l, fu
     fclose (f);
 }
 
-void GENIUS::create_db (char *filename, char *name, WIGType *d, ParmList *l, functionman *man, int first, int mode) 
+void GENIUS::create_db (const char *filename, const char *name, WIGType *d, ParmList *l, functionman *man, int first, int mode) 
 { 
     FILE *f;
     char fname[1024];
     char tmpname[1024];
-    char *prototype, *basename, *c;
+    char *prototype, *c;
+    const char *basename;
     char  textbuf[10000];
 
     if (!DBPATH) return;
