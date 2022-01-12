@@ -95,11 +95,12 @@ static APICallFunc *buildcallfunc(char **tab, int cnt)
         }
       else if (tab[i][0]=='"')
         {
+          //TODO - WTF is this doing exactly?
           char temp[4096];
           int j;
           strcpy(temp, &tab[i][1]);
           temp[strlen(temp)-1]='\0';
-          for (j=0; temp[j]!='\0'; j++) if (temp[j]=='ù') temp[j]=' ';
+          for (j=0; temp[j]!='\0'; j++) if (temp[j]=='\037') temp[j]=' ';
           cl=APIAddPointerTARG(cl, "?", "char", 1, sensitive_namealloc(temp));
         }
       else if (strchr(tab[i],'.')!=NULL)

@@ -309,10 +309,11 @@ static void _PrintCall(FILE *f, APICallFunc *cf)
         {
           if (ta->POINTER==1 && strcmp(ta->TYPE,"char")==0)
             {
+              //TODO - WTF is this doing exactly?
               char temp[4096];
               int i;
-              strcpy(temp, *(char **)ta->VALUE);
-              for (i=0;temp[i]!='\0'; i++) if (temp[i]==' ') temp[i]='ù';
+              strncpy(temp,*(char **)ta->VALUE, sizeof(temp)-strlen(temp)-sizeof(*(char **)ta->VALUE));
+              for (i=0;temp[i]!='\0'; i++) if (temp[i]==' ') temp[i]='\037';
               fprintf(f," \"%s\"", temp);
             }
           else
