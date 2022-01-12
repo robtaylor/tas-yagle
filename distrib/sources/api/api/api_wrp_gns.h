@@ -51,6 +51,6 @@ public:
     void initialize (void);
     void headers (void);
     void close (void);
-    void set_module (char *);
+    void set_module (const char *);
     void create_command (char *, char *);
 };

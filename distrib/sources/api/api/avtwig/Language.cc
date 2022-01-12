@@ -264,14 +264,14 @@ void Language::create_filter_online (char *filter, char *online_path, Man *mans)
 
 }
 
-void Language::create_man (char *name, ApiType *t, ParmList *l, functionman *m) 
+void Language::create_man (const char *name, ApiType *t, ParmList *l, functionman *m)
 {
   m = NULL;
   l = NULL;
   t = NULL;
   name = NULL;
 }
-void Language::create_xml (char *filename, char *name, ApiType *t, ParmList *l, functionman *m, int first, int mode) 
+void Language::create_xml (const char *filename, const char *name, ApiType *t, ParmList *l, functionman *m, int first, int mode)
 {
   mode = 0;
   first = 0;
@@ -281,7 +281,7 @@ void Language::create_xml (char *filename, char *name, ApiType *t, ParmList *l, 
   name = NULL;
   filename = NULL;
 }
-void Language::create_db (char *filename, char *name, ApiType *t, ParmList *l, functionman *m, int first, int mode) 
+void Language::create_db (const char *filename, const char *name, ApiType *t, ParmList *l, functionman *m, int first, int mode)
 {
   mode=0;
   first = 0;
