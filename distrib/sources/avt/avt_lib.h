@@ -293,7 +293,7 @@ typedef struct V_BOOL {
 typedef struct V_STR {
     const char *VARENV;
     int   INDEX;
-    const char *VALUE;
+    char *VALUE;
     int   DOC;
     int   SET;
     char *VAR;
@@ -921,7 +921,7 @@ void avt_setlibloglevel (int lib, int level);
 int avt_islog ( int level, int lib );
 void avt_PrintErrorSummary();
 double avt_parse_unit(const char *str, char type);
-void V_STR_AFFECT_F(const char **x, const char *v);
+void V_STR_AFFECT_F(char **x, const char *v);
 
 // ------------ configuration variable values -------------
 extern char *ANNOT_T_D, *ANNOT_T_S, *ANNOT_T_G, *ANNOT_T_B;

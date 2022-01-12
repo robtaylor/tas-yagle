@@ -193,7 +193,7 @@ void avt_errmsg (long lib, const char *num, int type, ...)
     char resbuf[4096];
     char filtercheck[16];
     int  n;
-    char *filter;
+    const char *filter;
     FILE *outstream;
 
     libname = avt_geterrlib(lib);
@@ -398,7 +398,7 @@ void avt_log( int lib, int level, const char *fmt, ... )
 void avt_initlog()
 {
   int   i ;
-  char *env ;
+  const char *env ;
   char *ptend ;
   long  level ;
   char *errmsg ;
@@ -436,7 +436,7 @@ defaultlevel = atoi( env );
   
     do {
    
-      while( *env && *env==' ' ) *env++;
+      while( *env && *env==' ' ) env++;
      
       if( *env ) {
         i=0;

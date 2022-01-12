@@ -361,7 +361,7 @@ V_BOOL V_BOOL_TAB[] = {
 //----------------------------------------------------------------------
 // STR
 //----------------------------------------------------------------------
-extern int mbk_decodvectorconfig( char *env );
+extern int mbk_decodvectorconfig(const char *env);
 
 int vectorize_init_check (const char *var, const char *val, char *result)
 { 
@@ -945,7 +945,7 @@ int setnewcurrentmodel( const char *var, const char *val, int *result )
   return res;
 }
 //======================================================================
-static char *checknull(char *str)
+static const char *checknull(const char *str)
 {
   if (str==NULL) return "(null)";
   return str;
@@ -1003,7 +1003,7 @@ static int avt_sethashvar_sub_bool(const char *var, const char *value, int warn,
 static int avt_sethashvar_sub_string(const char *var, const char *value, int warn, int set, int index)
 {
   int start=0, end=V_STR_TAB_SIZE, oldset, i;
-  const char *oldval=NULL;
+  char *oldval=NULL;
 
   if (index>=0) start=index, end=index+1;
   
@@ -1568,7 +1568,7 @@ void avt_man (int all)
 
 }
 
-void V_STR_AFFECT_F(const char **x, const char *v)
+void V_STR_AFFECT_F(char **x, const char *v)
 {
   if (*x!=NULL) free(*x);
   *x=(v==NULL)?NULL:strdup(v);
